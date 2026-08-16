@@ -2,9 +2,26 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project status
+## デプロイ先
 
-This is a new project. Technical stack, build/lint/test commands, and architecture have not been decided yet. This section should be filled in once the stack is chosen — commands for build/lint/test/dev-server, and a high-level description of the architecture (major modules, how they interact, key data flow) that isn't obvious from a single file.
+https://keeeta-ui.github.io/task-board/
+
+## 技術スタック
+
+- Vite + React 19 + TypeScript
+- Lint: oxlint (`npm run lint`)
+- Build: `npm run build`（`tsc -b` で型チェックしてから `vite build`）
+- Dev server: `npm run dev`
+- 状態管理は React の `useState`/`useEffect` のみ（外部の状態管理ライブラリは未導入）
+- データ永続化は `localStorage`（外部バックエンド・DBは無し）
+
+## コンポーネントの命名規約
+
+- コンポーネントファイルは `src/components/` 配下に `PascalCase.tsx`（例: `TaskInput.tsx`, `TaskItem.tsx`, `TaskList.tsx`）
+- コンポーネントは名前付きエクスポート（`export function ComponentName(...)`）。`App.tsx` のみエントリーポイントとしてデフォルトエクスポート
+- Props の型は `<ComponentName>Props` という interface 名（例: `TaskInputProps`）で、コンポーネント定義の直前に置く
+- ドメイン型（`Task` など）は `src/types.ts` にまとめる
+- CSS クラス名は BEM 風（`block`, `block__element`, `block--modifier`）を使用し、コンポーネント名をブロック名にする（例: `.task-item`, `.task-item__label`, `.task-item--completed`）
 
 ## Git workflow rules
 
